@@ -5,6 +5,7 @@ module.exports = (BasePlugin) ->
 	pathUtil = require('path')
 	safefs = require('safefs')
 	sm = require('sitemap')
+	sortObj = require('array-sort')
 
 	# Define Plugin
 	class SitemapPlugin extends BasePlugin
@@ -67,6 +68,8 @@ module.exports = (BasePlugin) ->
 					docpad.log "debug", data
 					sitemapData.urls.push data
 
+			# Sort by page URL
+			sitemapData.urls = sortObj(sitemapData.urls, 'url')
 			# setup sitemap with our data
 			sitemap = sm.createSitemap(sitemapData);
 
